@@ -3,36 +3,58 @@
  *
  * This project uses @Incubating APIs which are subject to change.
  */
-
 plugins {
-    id 'java-library'
-    id 'maven-publish'
+    id 'java'
+    id 'io.qameta.allure' version '2.11.2'
 }
 
+group = 'com.library.framework'
+version = '1.0-SNAPSHOT'
+description = 'test-automation-framework'
+
 repositories {
-    mavenLocal()
-    maven {
-        url = uri('https://repo.maven.apache.org/maven2/')
+    mavenCentral()
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
-group = 'com.libraryfull.framework'
-version = '1.0-SNAPSHOT'
-description = 'test-automation-framework'
-java.sourceCompatibility = JavaVersion.VERSION_1_8
+dependencies {
+    // UI Testing - Selenium
+    implementation 'org.seleniumhq.selenium:selenium-java:4.18.1'
 
-publishing {
-    publications {
-        maven(MavenPublication) {
-            from(components.java)
+    // API Testing - RestAssured
+    testImplementation 'io.rest-assured:rest-assured:6.1.0'
+
+    // Test Runner - TestNG
+    testImplementation 'org.testng:testng:7.9.0'
+
+    // Allure Reporting
+    testImplementation 'io.qameta.allure:allure-testng:2.25.0'
+
+    // Test Data Generation & Utilities
+    testImplementation 'net.datafaker:datafaker:2.1.0'
+    testImplementation 'org.slf4j:slf4j-simple:2.0.12'
+    testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.17.5'
+}
+
+test {
+    useTestNG() {
+        // Allows filtering test groups from terminal: ./gradlew test -Dgroups=smoke
+        if (System.getProperty("groups") != null) {
+            includeGroups System.getProperty("groups")
         }
+    }
+
+    // Displays test progress in the terminal output
+    testLogging {
+        events "passed", "skipped", "failed"
     }
 }
 
 tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
-}
-
-tasks.withType(Javadoc) {
     options.encoding = 'UTF-8'
 }
