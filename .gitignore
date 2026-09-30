@@ -12,6 +12,14 @@ dependency-reduced-pom.xml
 .mvn/timing.properties
 
 ####################################
+# Gradle (Optional)
+####################################
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+
+####################################
 # Logs & Reports
 ####################################
 *.log
@@ -25,17 +33,22 @@ allure-report/
 extent-reports/
 
 ####################################
-# Selenium / WebDriver
+# Test Automation / Drivers
 ####################################
 webdriver/
+drivers/
 *.exe
-*.log
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
 
 ####################################
 # Environment / Secrets
 ####################################
 .env
 .env.*
+!.env.example
 *.properties.local
 config/local/
 
@@ -69,10 +82,12 @@ out/
 ####################################
 .DS_Store
 Thumbs.db
+*.exe.stackdump
 
 ####################################
-# Temporary files
+# Temporary & Custom files
 ####################################
 *.swp
 *.swo
 *~
+TEST.md
