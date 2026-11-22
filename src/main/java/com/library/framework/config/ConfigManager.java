@@ -13,9 +13,11 @@ import org.slf4j.LoggerFactory;
 
 public class ConfigManager {
 
+    static String environment = System.getProperty("env", "dev");
+
     private static final Logger logger = LoggerFactory.getLogger(ConfigManager.class);
     private static final Properties PROPERTIES = new Properties();
-    private static final String CONFIG_FILE = "config.properties";
+    private static final String CONFIG_FILE = "config/config-" + environment + ".properties";
 
     //Executed once when the class is initialized
     static {

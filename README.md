@@ -38,7 +38,7 @@ El framework sigue los principios de diseño limpio y patrones de arquitectura e
 ## 📁 Estructura del Proyecto
 
 ```text
-api-sistema-biblioteca-automation/
+test-automation-framework/
 ├── .github/
 │   └── workflows/                # Pipeline de CI/CD para GitHub Actions
 ├── src/

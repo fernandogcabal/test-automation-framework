@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.1.dtd">
+<suite name="API Suite">
+    <test name="api-tests">
+        <groups>
+            <run>
+                <include name="api"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.library.framework.api.books.BookApiTest"/>
+            <class name="com.library.framework.api.users.UserApiTest"/>
+        </classes>
+    </test>
+</suite>
