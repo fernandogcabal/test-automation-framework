@@ -10,7 +10,6 @@ plugins {
 
 group = 'com.library.framework'
 version = '1.0-SNAPSHOT'
-description = 'test-automation-framework'
 
 repositories {
     mavenCentral()
@@ -24,34 +23,22 @@ java {
 
 dependencies {
     implementation 'org.slf4j:slf4j-api:2.0.16'
-    // Test Runner - TestNG
-    testImplementation 'org.testng:testng:7.9.0'
-    // UI Testing - Selenium
     implementation 'org.seleniumhq.selenium:selenium-java:4.18.1'
-    // API Testing - RestAssured
-    testImplementation 'io.rest-assured:rest-assured:6.1.0'
-    // Allure Reporting
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.2'
+    testImplementation 'org.testng:testng:7.9.0'
+    implementation 'io.rest-assured:rest-assured:6.0.1'
     testImplementation 'io.qameta.allure:allure-testng:2.25.0'
-    // Test Data Generation & Utilities
     testImplementation 'net.datafaker:datafaker:2.1.0'
     testImplementation 'org.slf4j:slf4j-simple:2.0.12'
-    testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.17.5'
+    testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.17.2'
 }
 
 test {
-    useTestNG() {
-        // Allows filtering test groups from terminal: ./gradlew test -Dgroups=smoke
-        if (System.getProperty("groups") != null) {
-            includeGroups System.getProperty("groups")
-        }
+    useTestNG {
+        suiteXmlFiles = [file("src/test/resources/testng.xml")]
     }
 
-    // Displays test progress in the terminal output
     testLogging {
         events "passed", "skipped", "failed"
     }
-}
-
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
 }
